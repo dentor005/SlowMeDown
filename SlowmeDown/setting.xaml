@@ -1,0 +1,101 @@
+﻿<phone:PhoneApplicationPage x:Class="SlowmeDown.setting"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            Background="#FFDC3C34"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            Loaded="PhoneApplicationPage_Loaded"
+                            Orientation="Portrait"
+                            SupportedOrientations="Portrait"
+                            shell:SystemTray.IsVisible="True"
+                            mc:Ignorable="d">
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton Click="ApplicationBarIconButton_Click"
+                                            IconUri="/Assets/AppBar/check.png"
+                                            IsEnabled="True"
+                                            Text="Done" />
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+    <!--  LayoutRoot is the root grid where all page content is placed  -->
+    <Grid x:Name="LayoutRoot" Background="#FFDC3C34">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  TitlePanel contains the name of the application and page title  -->
+        <StackPanel Grid.Row="0"
+                    Height="130"
+                    Margin="0,0,0,10"
+                    Background="#FF2C2B2B">
+            <TextBlock Height="109"
+                       Margin="9,15,0,0"
+                       Style="{StaticResource PhoneTextTitle1Style}"
+                       Text="Settings" />
+        </StackPanel>
+
+        <!--  ContentPanel - place additional content here  -->
+        <Grid x:Name="ContentPanel"
+              Grid.Row="1"
+              Margin="13,0,11,0"
+              Background="#00BFFF">
+            <TextBlock Width="446"
+                       Height="59"
+                       Margin="10,167,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Speed Limit ( You will be notified when you cross this limit)"
+                       TextWrapping="Wrap" />
+            <TextBlock Width="225"
+                       Height="39"
+                       Margin="4,35,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="Speed In "
+                       TextWrapping="Wrap" />
+            <RadioButton x:Name="radiokilometer"
+                         Width="188"
+                         Margin="4,74,0,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Content="Km/Hr"
+                         GroupName="speed"
+                         IsChecked="True" />
+            <RadioButton x:Name="radiomile"
+                         Width="184"
+                         Margin="234,74,0,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Content="Miles/Hr"
+                         GroupName="speed" />
+            <TextBox x:Name="txtboxSpeedLimit"
+                     Width="456"
+                     Height="72"
+                     Margin="0,231,0,0"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     InputScope="Number"
+                     MaxLength="3"
+                     Text="80"
+                     TextWrapping="Wrap" />
+            <toolkit:ToggleSwitch x:Name="toggleLocation"
+                                  Margin="10,312,14,122"
+                                  Content="Access Location"
+                                  Header="Allow location access"
+                                  IsChecked="True"
+                                  SwitchForeground="#FF2C2B2B" />
+            <HyperlinkButton Margin="-2,429,296,95"
+                             Click="HyperlinkButton_Click"
+                             Content="Privacy Policy" />
+        </Grid>
+    </Grid>
+
+</phone:PhoneApplicationPage>

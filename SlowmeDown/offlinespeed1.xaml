@@ -1,0 +1,331 @@
+﻿<phone:PhoneApplicationPage x:Class="SlowmeDown.offlinespeed1"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:gauges="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.DataVisualization"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+                            xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            Orientation="Portrait"
+                            SupportedOrientations="Portrait"
+                            shell:SystemTray.IsVisible="True"
+                            mc:Ignorable="d">
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{StaticResource PhoneForegroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}" />
+            <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}" />
+            <Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilySemiBold}" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
+            <Setter Property="Padding" Value="10,5,10,6" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Margin="-14,-39,-13,-24" Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneButtonBasePressedForegroundBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentContainer" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonBackground" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="ButtonBackground"
+                                    Margin="10,10,14,14"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="70">
+                                <ContentControl x:Name="ContentContainer"
+                                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                Foreground="{TemplateBinding Foreground}"
+                                                Padding="{TemplateBinding Padding}" />
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
+    <!--  LayoutRoot is the root grid where all page content is placed  -->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--  Pivot Control  -->
+        <phone:Pivot>
+            <!--  Pivot item one  -->
+            <phone:PivotItem Margin="0,-17,0,0" Background="#00BFFF">
+                <Grid>
+                    <gauges:RadialGaugeRange Margin="0,0,0,337"
+                                             LabelRadiusScale="0.6"
+                                             LabelStep="20"
+                                             MaxAngle="270"
+                                             MaxValue="220"
+                                             MinAngle="0"
+                                             MinValue="0"
+                                             SweepDirection="Clockwise"
+                                             TickRadiusScale="0.8"
+                                             TickStep="20">
+                        <gauges:RadialGaugeRange.TickTemplate>
+                            <DataTemplate>
+                                <Rectangle Width="45"
+                                           Height="4"
+                                           Fill="White" />
+                            </DataTemplate>
+
+                        </gauges:RadialGaugeRange.TickTemplate>
+
+
+                        <gauges:RadialBarGaugeIndicator x:Name="gaugespeed"
+                                                        Height="434"
+                                                        AnimationDuration="0:0:0.5"
+                                                        BarBrush="{Binding}"
+                                                        BarThickness="35"
+                                                        IsAnimated="True"
+                                                        gauges:RadialGaugeRange.IndicatorRadiusScale="0.8"
+                                                        gauges:RadialGaugeRange.MaxAngle="270"
+                                                        Value="0">
+
+                            <gauges:RadialBarGaugeIndicator.AnimationEasing>
+                                <ElasticEase />
+                            </gauges:RadialBarGaugeIndicator.AnimationEasing>
+                        </gauges:RadialBarGaugeIndicator>
+
+
+
+                        <gauges:ArrowGaugeIndicator x:Name="arrowspeed"
+                                                    Height="431"
+                                                    AnimationDuration="0:0:0.5"
+                                                    ArrowBrush="#FF2C2B2B"
+                                                    ArrowThickness="12"
+                                                    Background="Black"
+                                                    IsAnimated="True"
+                                                    gauges:RadialGaugeRange.IndicatorRadiusScale="0.8"
+                                                    gauges:RadialGaugeRange.MaxAngle="270"
+                                                    Value="0" />
+                    </gauges:RadialGaugeRange>
+
+                    <TextBlock x:Name="userSpeed"
+                               Width="198"
+                               Height="89"
+                               Margin="0,247,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="55"
+                               Foreground="White"
+                               Text=""
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+
+                    <TextBlock x:Name="userSpeedUnit"
+                               Width="198"
+                               Height="74"
+                               Margin="0,314,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="45"
+                               Foreground="White"
+                               Text=""
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+
+                    <TextBlock x:Name="userMaxSpeed"
+                               Width="198"
+                               Height="55"
+                               Margin="0,472,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="35"
+                               Foreground="White"
+                               Text="Max. Speed:"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+
+                    <TextBlock x:Name="userMaxSpeedValue"
+                               Width="198"
+                               Height="55"
+                               Margin="200,472,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               FontSize="35"
+                               Foreground="White"
+                               Text="0"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+
+
+                    <Button x:Name="broadcast"
+                            Width="262"
+                            Height="110"
+                            Margin="62,607,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="White"
+                            Click="broadcast_Click"
+                            Content="Share my Speed"
+                            Foreground="#FFDC3C34"
+                            RenderTransformOrigin="0.476,0.529"
+                            Style="{StaticResource ButtonStyle1}" />
+
+                    <Button x:Name="buttonBroadcastHelp"
+                            Width="82"
+                            Height="93"
+                            Margin="334,560,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="{x:Null}"
+                            Content=""
+                            telerikPrimitives:RadToolTipService.RelativeElement="{Binding ElementName=broadcast}"
+                            telerikPrimitives:RadToolTipService.ShowGesture="Tap"
+                            telerikPrimitives:RadToolTipService.ToolTip="Allow your friends to monitor your speed">
+
+                        <telerikPrimitives:RadToolTipService.Style>
+                            <Style TargetType="telerikPrimitives:RadToolTip">
+                                <Setter Property="Background" Value="#FFFDF541" />
+                                <Setter Property="FontSize" Value="22" />
+                                <Setter Property="Foreground" Value="#FFDC3C34" />
+                                <Setter Property="OpenAnimation">
+                                    <Setter.Value>
+                                        <telerikCore:RadFadeAnimation Duration="0:0:0.3"
+                                                                      EndOpacity="1"
+                                                                      StartOpacity="0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </telerikPrimitives:RadToolTipService.Style>
+
+
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Assets/AppBar/questionmark.png" Stretch="Fill" />
+                        </Button.Background>
+                    </Button>
+                    <Image x:Name="buttonSpeedSms"
+                           Width="110"
+                           Height="105"
+                           Margin="324,637,0,0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Source="/Assets/AppBar/feature.email.png"
+                           Tap="buttonSpeedSms_Tap"
+                           Visibility="Collapsed" />
+
+                    <telerikPrimitives:RadBusyIndicator x:Name="telerikLoading"
+                                                        Width="142"
+                                                        Height="123"
+                                                        Margin="28,247,286,398"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        AnimationStyle="AnimationStyle6"
+                                                        Content="GPS Loading"
+                                                        ContentPosition="Bottom"
+                                                        FontSize="25"
+                                                        Foreground="White" />
+                    <Slider x:Name="speedslider"
+                            Width="57"
+                            Height="245"
+                            Margin="0,513,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            LargeChange="10"
+                            Maximum="220"
+                            Minimum="0"
+                            Orientation="Vertical"
+                            RenderTransformOrigin="0.5,0.5"
+                            SmallChange="10" />
+                </Grid>
+            </phone:PivotItem>
+
+            <!--  Pivot item two  -->
+            <phone:PivotItem Margin="0,-13,0,0">
+
+                <Grid>
+                    <Grid Margin="0,10,0,672">
+                        <TextBlock Width="232"
+                                   Height="77"
+                                   Margin="4,8,0,4"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   Text="Location"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Width="229"
+                                   Height="69"
+                                   Margin="241,10,0,0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                   FontSize="40"
+                                   FontWeight="Bold"
+                                   Text="Max Speed"
+                                   TextWrapping="Wrap" />
+
+                    </Grid>
+                    <Grid Margin="0,104,0,0">
+                        <ListBox x:Name="checkeventlistbox"
+                                 Height="657"
+                                 VerticalAlignment="Bottom"
+                                 IsTabStop="True"
+                                 ItemsSource="{Binding item}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="0,0,0,15" VerticalAlignment="Top">
+                                        <TextBlock Width="294"
+                                                   Height="80"
+                                                   Margin="5,10,0,0"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="Top"
+                                                   FontSize="22"
+                                                   FontWeight="Bold"
+                                                   Text="{Binding location}"
+                                                   TextWrapping="Wrap" />
+                                        <TextBlock Width="166"
+                                                   Height="80"
+                                                   Margin="300,-50,0,0"
+                                                   HorizontalAlignment="Left"
+                                                   VerticalAlignment="top"
+                                                   FontSize="22"
+                                                   FontWeight="Bold"
+                                                   Text="{Binding maxspeeder}"
+                                                   TextWrapping="Wrap" />
+
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </Grid>
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+
+</phone:PhoneApplicationPage>
